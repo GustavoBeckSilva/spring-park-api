@@ -1,5 +1,8 @@
 package com.compass.demo_park_api.web.dto.mapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 
@@ -22,6 +25,10 @@ public class UsuarioMapper {
 		mapper -> mapper.map(src -> role, UsuarioResponseDto::setRole)
 		);
 		return mapperMain.map(user, UsuarioResponseDto.class);
-		}
+	}
+	
+	public static List<UsuarioResponseDto> toListDto(List<Usuario> usuarios){
+		return usuarios.stream().map(u -> toDto(u)).collect(Collectors.toList());
+	}
 	
 }
