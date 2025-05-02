@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.compass.demo_park_api.entity.Usuario;
 import com.compass.demo_park_api.repository.UsuarioRepository;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -17,6 +17,12 @@ public class UsuarioService {
 	@Transactional
 	public Usuario salvar(Usuario usuario) {
 		return usuarioRepository.save(usuario);
+	}
+	
+	@Transactional(readOnly = true)
+	public Usuario buscarPorId(Long id){
+		return usuarioRepository.findById(id).orElseThrow(
+				() -> new RuntimeException("Usuário não encontrado."));
 	}
 	
 }
