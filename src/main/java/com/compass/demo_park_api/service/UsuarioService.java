@@ -2,8 +2,10 @@ package com.compass.demo_park_api.service;
 
 import org.springframework.stereotype.Service;
 
+import com.compass.demo_park_api.entity.Usuario;
 import com.compass.demo_park_api.repository.UsuarioRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -11,5 +13,10 @@ import lombok.RequiredArgsConstructor;
 public class UsuarioService {
 	
 	private final UsuarioRepository usuarioRepository;
+	
+	@Transactional
+	public Usuario salvar(Usuario usuario) {
+		return usuarioRepository.save(usuario);
+	}
 	
 }
