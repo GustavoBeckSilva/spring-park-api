@@ -1,11 +1,13 @@
 package com.compass.demo_park_api.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.compass.demo_park_api.entity.Usuario;
 import com.compass.demo_park_api.repository.UsuarioRepository;
 
-import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -31,5 +33,11 @@ public class UsuarioService {
 		user.setPassword(password);
 		return user;
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Usuario> buscarTodos(){
+		return usuarioRepository.findAll();
+	}
+	
 	
 }
